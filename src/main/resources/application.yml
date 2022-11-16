@@ -1,0 +1,14 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: app-min-educacao
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/min_educacao
+    username: root
+    password: app_employees
+  jpa:
+    hibernate.ddl-auto: none
+    generate-ddl: false
+    show-sql: false

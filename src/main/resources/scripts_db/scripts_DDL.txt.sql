@@ -1,0 +1,15 @@
+CREATE DATABASE min_educacao;
+
+use min_educacao;
+
+CREATE TABLE DISCIPLINA (
+id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+titulo Varchar(50) NOT NULL,
+area Varchar(40) NOT NULL
+);
+
+CREATE TABLE ESCOLARIDADE (
+id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+idade INT UNIQUE NOT NULL,
+ano_escolar Varchar(15) NOT NULL
+);
