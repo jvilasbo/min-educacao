@@ -1,6 +1,7 @@
 package com.nttdata.projeto.mineducacao.controllers;
 
 import com.nttdata.projeto.mineducacao.dto.DisciplinaResponseDTO;
+import com.nttdata.projeto.mineducacao.dto.EscolaridadeResponseDTO;
 import com.nttdata.projeto.mineducacao.services.DisciplinaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,12 @@ public class DisciplinaController {
         return new ResponseEntity<>(listDisciplinasResponseDTO, HttpStatus.OK);
     }
 
+    @GetMapping("/areas")
+    @ResponseBody
+    public ResponseEntity<Object> getAllAreas(){
+        List<String> listDistinctAreas = disciplinaService.getAllDistinctAreas();
+        return new ResponseEntity<>(listDistinctAreas, HttpStatus.OK);
+    }
  /*   @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Object> getById(@PathVariable int id){
@@ -40,4 +47,12 @@ public class DisciplinaController {
         DisciplinaResponseDTO d1 = assembler.toDTO(d);
         return new ResponseEntity<>(d1, HttpStatus.OK);
     }*/
+
+    @GetMapping("/{titulo}")
+    @ResponseBody
+    public ResponseEntity<Object> getByTitulo(@PathVariable String titulo){
+        DisciplinaResponseDTO escolaridade = disciplinaService.getByTitulo(titulo);
+
+        return new ResponseEntity<>(escolaridade, HttpStatus.OK);
+    }
 }

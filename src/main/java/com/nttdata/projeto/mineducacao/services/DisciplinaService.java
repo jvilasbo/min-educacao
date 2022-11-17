@@ -1,7 +1,9 @@
 package com.nttdata.projeto.mineducacao.services;
 
 import com.nttdata.projeto.mineducacao.domain.entities.DisciplinaEntity;
+import com.nttdata.projeto.mineducacao.domain.entities.EscolaridadeEntity;
 import com.nttdata.projeto.mineducacao.dto.DisciplinaResponseDTO;
+import com.nttdata.projeto.mineducacao.dto.EscolaridadeResponseDTO;
 import com.nttdata.projeto.mineducacao.repositories.IDisciplinaRepository;
 import com.nttdata.projeto.mineducacao.dto.assemblers.DisciplinaDomainToDtoAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +29,16 @@ public class DisciplinaService {
             listDisciplinasResponseDTO.add(disciplinaResponseDTO);
         }
         return listDisciplinasResponseDTO;
+    }
+
+    public List<String> getAllDistinctAreas() {
+        List<String> listAreas = disciplinaRepository.findAllDistinct();
+        return listAreas;
+    }
+
+    public DisciplinaResponseDTO getByTitulo(String titulo) {
+        DisciplinaEntity disciplina = disciplinaRepository.getReferenceByTitulo(titulo);
+        DisciplinaResponseDTO distinctResponseDTO = disciplinaAssembler.toDTO(disciplina);
+        return distinctResponseDTO;
     }
 }

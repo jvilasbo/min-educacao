@@ -9,7 +9,7 @@ import javax.persistence.*;
 @EqualsAndHashCode
 @RequiredArgsConstructor
 @Table(name="DISCIPLINA")
-@Entity
+@Entity(name="DISCIPLINA")
 public class DisciplinaEntity {
 
     @Id
