@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DisciplinaService {
@@ -24,7 +25,7 @@ public class DisciplinaService {
         List<DisciplinaEntity> listDisciplinas = disciplinaRepository.findAll();
 
         List<DisciplinaResponseDTO> listDisciplinasResponseDTO = new ArrayList<>();
-        for(DisciplinaEntity d : listDisciplinas){
+        for (DisciplinaEntity d : listDisciplinas) {
             DisciplinaResponseDTO disciplinaResponseDTO = disciplinaAssembler.toDTO(d);
             listDisciplinasResponseDTO.add(disciplinaResponseDTO);
         }
@@ -36,9 +37,11 @@ public class DisciplinaService {
         return listAreas;
     }
 
-    public DisciplinaResponseDTO getByTitulo(String titulo) {
-        DisciplinaEntity disciplina = disciplinaRepository.getReferenceByTitulo(titulo);
-        DisciplinaResponseDTO distinctResponseDTO = disciplinaAssembler.toDTO(disciplina);
-        return distinctResponseDTO;
+    public Optional<DisciplinaResponseDTO> getByTitulo(String titulo) {
+        Optional<DisciplinaEntity> disciplinaOptional = disciplinaRepository.getReferenceByTitulo(titulo);
+        if (disciplinaOptional.isPresent()) {
+            DisciplinaResponseDTO distinctResponseDTO = disciplinaAssembler.toDTO(disciplinaOptional.get());
+            return Optional.of(distinctResponseDTO);
+        } else return Optional.empty();
     }
 }
